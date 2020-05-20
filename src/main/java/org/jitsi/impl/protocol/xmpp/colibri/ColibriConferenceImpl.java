@@ -687,7 +687,13 @@ public class ColibriConferenceImpl
         request.setName(conferenceState.getName());
 
         ColibriConferenceIQ.Content audioContent
+            = channelsInfo.getContent("audio");
+        
+        ColibriConferenceIQ.Content videoContent
             = channelsInfo.getContent("video");
+        ColibriConferenceIQ.Channel videoChannel
+            = videoContent.getChannel(0);
+        videoChannel.setDirection(MediaDirection.INACTIVE.toString());
 
         if (audioContent == null || isBlank(request.getID()))
         {
